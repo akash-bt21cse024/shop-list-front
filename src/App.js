@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     getWishlistData();
-  }, [wishlistreducer, getWishlistData]);
+  }, [wishlistreducer]);
 
   const { setcard, cardreducer } = useCard();
 
@@ -32,7 +32,7 @@ function App() {
 
   useEffect(() => {
     getCardData();
-  }, [cardreducer, getCardData]);
+  }, [cardreducer]);
 
   return (
     <Routes>
