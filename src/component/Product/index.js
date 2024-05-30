@@ -54,7 +54,7 @@ export const Product = (product) => {
       ((Number(price) * 100) / (100 - Number(discount))) * 84
     ).toFixed(2);
   };
-  const { setcardreducer, card, setproduct } = useCard();
+  const { setcardreducer, card, token } = useCard();
   const { setwishlistreducer, wishlist } = useWishlist();
   const findProductInWishlist = (wishlist, productId) =>
     wishlist.some((prod) => prod._id === productId);
@@ -142,7 +142,7 @@ export const Product = (product) => {
             {" "}
             <button
               className="font-bold text-xl hover:opacity-50  px-3 py-1 w-1/2 border-slate-800 rounded-md bg-amber-600 border "
-              onClick={payment}
+              onClick={()=> token?.length>0?payment():navigate("/auth")}
             >
               Buy
             </button>

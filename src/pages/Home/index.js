@@ -5,7 +5,7 @@ import { Header } from "../../component/Header";
 import { Sidebar } from "../../component/Sidebar";
 import { productfilterbyprice } from "../../utils/filter.helper";
 import { useFilter } from "../../context/filter.context";
-
+import { Loader } from "../../component/Loader";
 export const Homepage = () => {
     const [products,setproduct]=useState([])
   const getdata = async () => {
@@ -25,7 +25,7 @@ export const Homepage = () => {
     <Sidebar></Sidebar>
   <div className="flex flex-wrap gap-3  ml-56">
   {
-    filterproduct?.length>0 ? filterproduct.map(product => <Productcard key={product._id} product={product}/>):<></>
+    filterproduct?.length>0 ? filterproduct.map(product => <Productcard key={product._id} product={product}/>):<Loader></Loader>
   }
   </div>
   </main>

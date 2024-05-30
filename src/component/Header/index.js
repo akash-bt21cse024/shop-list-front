@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const { wishlist } = useWishlist();
-  const {card}=useCard();
+  const {card,token,settoken}=useCard();
   const navigate=useNavigate();
-
+settoken(localStorage.getItem("token"));
   return (
     <header
       className="flex drop-shadow-lg h-12 items-center justify-between bg-cyan-50
@@ -32,8 +32,21 @@ export const Header = () => {
           {card?.length>0?<div className="absolute top-0 bg-gray-900 right-0  text-white rounded-full h-4 w-5 flex items-center justify-center">
             {card.length}
           </div>:""}
+        
           
         </div>
+        <div>
+            <button  onClick={()=>{
+              if(!token){
+                navigate("/auth")
+              }
+              else{
+                navigate("/auth");
+                localStorage.clear();
+                console.log("clear storage");
+              }
+            }}> {token?.length>0?'Logout':"Login"}</button>
+          </div>
       </div>
     </header>
   );

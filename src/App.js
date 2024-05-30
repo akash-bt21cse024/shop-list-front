@@ -8,6 +8,9 @@ import { cardfilter } from "./utils/card.helper";
 import { useCard } from "./context/card.context";
 import { Cardpage } from "./pages/Card";
 import { Productpage } from "./pages/Product";
+import { Authpage } from "./pages/Auth";
+import { ProtectedRoute } from "./context/ProtectedRoute";
+
 function App() {
   const {setwishlist,wishlistreducer}=useWishlist();
   const gtdata =async ()=>{
@@ -30,9 +33,11 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Homepage></Homepage>}></Route>
-      <Route path="/wishlist" element={<Wishlistpage></Wishlistpage>}></Route>
-      <Route path="/card" element={<Cardpage></Cardpage>}></Route>
+      <Route path="/wishlist" element={<ProtectedRoute><Wishlistpage></Wishlistpage></ProtectedRoute>}></Route>
+      <Route path="/card" element={<ProtectedRoute><Cardpage></Cardpage></ProtectedRoute>}></Route>
       <Route path="/product" element={<Productpage></Productpage>}></Route>
+      <Route path="/auth" element={<Authpage></Authpage>}></Route>
+
     </Routes>
   );
 }
