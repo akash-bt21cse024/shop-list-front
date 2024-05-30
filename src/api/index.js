@@ -17,7 +17,7 @@ const wishlistUrl = "https://shop-list-1-r908.onrender.com/api/wishlist";
 export const getallwishlist = async () => {
   try {
     const {
-      data: { status, data },
+      data: { data },
     } = await axios.get(wishlistUrl);
 
     return data;
@@ -28,14 +28,15 @@ export const getallwishlist = async () => {
 
 export const postwishlist = async (wishlist) => {
   try {
-    const data = await axios.post(wishlistUrl, wishlist);
+    await axios.post(wishlistUrl, wishlist);
+    
   } catch (err) {
     console.log("error occured", err);
   }
 };
 export const deletewishlist = async (product) => {
   try {
-    const data = await axios.delete(wishlistUrl + "/" + product.id);
+     await axios.delete(wishlistUrl + "/" + product.id);
   } catch (err) {
     console.log("error occured", err);
   }
@@ -57,14 +58,14 @@ export const getallcard = async () => {
 
 export const postcard = async (wishlist) => {
   try {
-    const data = await axios.post(cardUrl, wishlist);
+     await axios.post(cardUrl, wishlist);
   } catch (err) {
     console.log("error occured", err);
   }
 };
 export const deletecard = async (product) => {
   try {
-    const data = await axios.delete(cardUrl + "/" + product.id);
+     await axios.delete(cardUrl + "/" + product.id);
   } catch (err) {
     console.log("error occured", err);
   }

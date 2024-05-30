@@ -1,5 +1,5 @@
 import { Homepage } from "./pages/Home";
-import { Routes,Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Wishlistpage } from "./pages/Wishlist";
 import { useWishlist } from "./context/wishlist.context";
 import { wishfilter } from "./utils/wishlist.helper";
@@ -12,32 +12,35 @@ import { Authpage } from "./pages/Auth";
 import { ProtectedRoute } from "./context/ProtectedRoute";
 
 function App() {
-  const {setwishlist,wishlistreducer}=useWishlist();
-  const gtdata =async ()=>{
-    const data = await wishfilter(wishlistreducer.product,wishlistreducer.type);
-    setwishlist(data);
-  }
-  useEffect(()=>{
-    gtdata();
-  },[wishlistreducer])
+  const { setwishlist, wishlistreducer } = useWishlist();
 
-  const {setcard,cardreducer}=useCard();
-  const getdata =async ()=>{
-    const data = await cardfilter(cardreducer.product,cardreducer.type);
+  const getWishlistData = async () => {
+    const data = await wishfilter(wishlistreducer.product, wishlistreducer.type);
+    setwishlist(data);
+  };
+
+  useEffect(() => {
+    getWishlistData();
+  }, [wishlistreducer, getWishlistData]);
+
+  const { setcard, cardreducer } = useCard();
+
+  const getCardData = async () => {
+    const data = await cardfilter(cardreducer.product, cardreducer.type);
     setcard(data);
-  }
-  useEffect(()=>{
-    getdata();
-  },[cardreducer])
+  };
+
+  useEffect(() => {
+    getCardData();
+  }, [cardreducer, getCardData]);
 
   return (
     <Routes>
-      <Route path="/" element={<Homepage></Homepage>}></Route>
-      <Route path="/wishlist" element={<ProtectedRoute><Wishlistpage></Wishlistpage></ProtectedRoute>}></Route>
-      <Route path="/card" element={<ProtectedRoute><Cardpage></Cardpage></ProtectedRoute>}></Route>
-      <Route path="/product" element={<Productpage></Productpage>}></Route>
-      <Route path="/auth" element={<Authpage></Authpage>}></Route>
-
+      <Route path="/" element={<Homepage />} />
+      <Route path="/wishlist" element={<ProtectedRoute><Wishlistpage /></ProtectedRoute>} />
+      <Route path="/card" element={<ProtectedRoute><Cardpage /></ProtectedRoute>} />
+      <Route path="/product" element={<Productpage />} />
+      <Route path="/auth" element={<Authpage />} />
     </Routes>
   );
 }
