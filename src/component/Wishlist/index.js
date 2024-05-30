@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
     };
   const navigate=useNavigate();
    const {setproduct}=useCard();
-  const {setwishlistreducer,Wishlist}=useWishlist();
+  const {setwishlistreducer}=useWishlist();
     return (
       <div className="border bg-white w-56 drop-shadow-2xl rounded-lg flex flex-col mt-20 gap-2">
         <div className="w-56 ">
