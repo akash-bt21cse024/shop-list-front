@@ -17,10 +17,11 @@ settoken(localStorage.getItem("token"));
         <div className="relative">
           <button onClick={()=>navigate('/wishlist')} >
             <span className="material-symbols-outlined text-2xl w-12 h=12">favorite</span>
-          </button>
-          {wishlist?.length>0?<div className="absolute top-0 bg-gray-900 right-0  text-white rounded-full h-4 w-5 flex items-center justify-center">
+            {wishlist?.length>0?<div className="absolute top-0 bg-gray-900 right-0  text-white rounded-full h-4 w-5 flex items-center justify-center">
             {wishlist.length}
           </div>:""}
+          </button>
+         
         </div>
 
         <div className="relative">
@@ -28,10 +29,11 @@ settoken(localStorage.getItem("token"));
             <span className="material-symbols-outlined text-2xl h-8 w-8">
               shopping_cart
             </span>
-          </button>
-          {card?.length>0?<div className="absolute top-0 bg-gray-900 right-0  text-white rounded-full h-4 w-5 flex items-center justify-center">
+            {card?.length>0?<div className="absolute top-0 bg-gray-900 right-0  text-white rounded-full h-4 w-5 flex items-center justify-center">
             {card.length}
           </div>:""}
+          </button>
+         
         
           
         </div>

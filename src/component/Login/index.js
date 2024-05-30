@@ -26,7 +26,9 @@ const navigate=useNavigate();
           }
         }
       } type="submit"> Login </button></div>
-       <div className=" my-2  border w-28 text-center drop-shadow-2xl bg-cyan-200 hover:opacity-50 "> <button onClick={()=>setsignup(true)}  > Signup </button></div>
+      <div className="my-2  border w-28 text-center drop-shadow-2xl bg-cyan-200 hover:opacity-50"><button>Login for credencial test </button></div>
+       <div className=" my-2  border w-28 text-center drop-shadow-2xl bg-cyan-200 hover:opacity-50 "> <button onClick={()=>setsignup(true)}  > Create new account </button></div>
+       
     {/* </form> */}
      </div>
     )

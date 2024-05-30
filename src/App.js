@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Wishlistpage } from "./pages/Wishlist";
 import { useWishlist } from "./context/wishlist.context";
 import { wishfilter } from "./utils/wishlist.helper";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { cardfilter } from "./utils/card.helper";
 import { useCard } from "./context/card.context";
 import { Cardpage } from "./pages/Card";
@@ -13,26 +13,25 @@ import { ProtectedRoute } from "./context/ProtectedRoute";
 
 function App() {
   const { setwishlist, wishlistreducer } = useWishlist();
+  const { setcard, cardreducer } = useCard();
 
-  const getWishlistData = async () => {
+  const getWishlistData = useCallback(async () => {
     const data = await wishfilter(wishlistreducer.product, wishlistreducer.type);
     setwishlist(data);
-  };
+  }, [wishlistreducer.product, wishlistreducer.type, setwishlist]);
 
   useEffect(() => {
     getWishlistData();
-  });
+  }, [getWishlistData]);
 
-  const { setcard, cardreducer } = useCard();
-
-  const getCardData = async () => {
+  const getCardData = useCallback(async () => {
     const data = await cardfilter(cardreducer.product, cardreducer.type);
     setcard(data);
-  };
+  }, [cardreducer.product, cardreducer.type, setcard]);
 
   useEffect(() => {
     getCardData();
-  });
+  }, [getCardData]);
 
   return (
     <Routes>
@@ -46,3 +45,5 @@ function App() {
 }
 
 export default App;
+
+
