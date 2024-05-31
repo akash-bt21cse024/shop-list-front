@@ -112,36 +112,36 @@ export const Product = (product) => {
               </span>
             </div>
           </div>
-          <div className="border w-1/2 flex my-.5 items-center  flex-col p-3 ">
+          <div className="border  flex my-.5 items-center  flex-col p-3 ">
             <button
               onClick={() => {
                 setwishlistreducer({ type: "post", payload: product });
               }}
               disabled={isInWishlist}
-              className={`text-stone-50  px-3 py-1 w-1/2 border-slate-800 rounded-md bg-amber-600 border ${
+              className={`text-stone-50  px-3 py-1  border-slate-800 rounded-md bg-amber-600 border ${
                 isInWishlist ? "opacity-50" : "hover:opacity-50"
               }`}
             >
               {isInWishlist ? "Added in wishlist" : "Add to Wishlist"}
             </button>
           </div>
-          <div className="border w-1/2 flex my-.5 items-center  flex-col p-3 drop-shadow-2xl">
+          <div className="border flex my-.5 items-center  flex-col p-3 drop-shadow-2xl">
             <button
               onClick={() => {
                 setcardreducer({ type: "post", payload: product });
               }}
               disabled={isInCard}
-              className={`text-stone-50  px-3 py-1 w-1/2 border-slate-800 rounded-md bg-amber-600 border ${
+              className={`text-stone-50  px-3 py-1  border-slate-800 rounded-md bg-amber-600 border ${
                 isInCard ? "opacity-50" : "hover:opacity-50"
               }`}
             >
               {isInCard ? "Addedd in card" : " Add to card"}
             </button>
           </div>
-          <div className="buy border w-1/2 flex  items-center flex-col p-3 my-.5 drop-shadow-2xl  ">
+          <div className="buy border  flex  items-center flex-col p-3 my-.5 drop-shadow-2xl  ">
             {" "}
             <button
-              className="font-bold text-xl hover:opacity-50  px-3 py-1 w-1/2 border-slate-800 rounded-md bg-amber-600 border "
+              className="font-bold text-xl hover:opacity-50  px-3 py-1 w-28 border-slate-800 rounded-md bg-amber-600 border "
               onClick={()=> token?.length>0?payment():navigate("/auth")}
             >
               Buy
