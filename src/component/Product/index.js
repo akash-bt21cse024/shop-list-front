@@ -65,18 +65,18 @@ export const Product = (product) => {
   const isInCard = findProductInCard(card, product._id);
 
   return (
-    <div className="mt-16 flex flex-row">
+    <div className="mt-16 flex flex-row bg-cyan-50">
       <div className="flex flex-wrap gap-3 w-1/2 ">
         {array?.length > 0 ? (
           array.map((url) => {
-            return <img className="h-56 w-42" src={url} alt="imag"></img>;
+            return <img className="h-60 w-56" src={url} alt="imag"></img>;
           })
         ) : (
           <></>
         )}{" "}
       </div>
       <div>
-        <div className="right flex flex-col items-center fixed border w-auto  bg-cyan-50   drop-shadow-2xl">
+        <div className="right flex flex-col items-center  border w-auto  bg-cyan-50  ">
           <div className="brand border  flex my-.5 items-center font-bold text-xl flex-col p-3 drop-shadow-2xl">
             {" "}
             <p>{product.brand}</p>{" "}
