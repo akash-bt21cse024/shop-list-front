@@ -17,7 +17,7 @@ import { useCard } from "../../context/card.context"
         return(
          <div className="flex items-center justify-center">
             <div className="flex flex-col items-center border bg-cyan-50 drop-shadow-2xl w-1/2 h-[32rem] ">
-              <h1 className="my-12 ">----Create new account----</h1>
+              <h1 className="my-12 ">------CREATE NEW ACCOUNT------</h1>
             <form className="flex flex-col border drop-shadow-2xl bg-cyan-100  justify-center  ">
               <div className=" my-2 border  drop-shadow-2xl bg-cyan-100 "><label className="mx-4">name--</label> <input onChange={(e)=>{console.log(e.target.value);
                 setname(e.target.value)}} required placeholder="Name"></input> </div>
