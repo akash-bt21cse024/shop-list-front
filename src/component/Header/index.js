@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const { wishlist } = useWishlist();
-  const {card,token,settoken}=useCard();
+  const {card,token,settoken,setuserid}=useCard();
   const navigate=useNavigate();
 settoken(localStorage.getItem("token"));
+setuserid(localStorage.getItem("userid"))
   return (
     <header
       className="flex drop-shadow-lg h-12 items-center justify-between bg-cyan-50
@@ -45,7 +46,7 @@ settoken(localStorage.getItem("token"));
               else{
                 navigate("/auth");
                 localStorage.clear();
-                console.log("clear storage");
+                
               }
             }}> {token?.length>0?'Logout':"Login"}</button>
           </div>

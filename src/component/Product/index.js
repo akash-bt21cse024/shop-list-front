@@ -56,12 +56,16 @@ export const Product = (product) => {
   };
   const { setcardreducer, card, token } = useCard();
   const { setwishlistreducer, wishlist } = useWishlist();
+  
   const findProductInWishlist = (wishlist, productId) =>
-    wishlist.some((prod) => prod._id === productId);
+  {
+     const flag=wishlist?.length>0?wishlist.some((prod) => prod._id === productId):false;
+    return flag;
+   }
   const isInWishlist = findProductInWishlist(wishlist, product._id);
 
   const findProductInCard = (card, productId) =>
-    card.some((prod) => prod._id === productId);
+    card?.some((prod) => prod._id === productId)
   const isInCard = findProductInCard(card, product._id);
 
   return (

@@ -13,21 +13,21 @@ import { ProtectedRoute } from "./context/ProtectedRoute";
 
 function App() {
   const { setwishlist, wishlistreducer } = useWishlist();
-  const { setcard, cardreducer } = useCard();
+  const { setcard, cardreducer,userid } = useCard();
 
   const getWishlistData = useCallback(async () => {
-    const data = await wishfilter(wishlistreducer.product, wishlistreducer.type);
+    const data = await wishfilter (wishlistreducer.product, wishlistreducer.type,userid);
     setwishlist(data);
-  }, [wishlistreducer.product, wishlistreducer.type, setwishlist]);
+  }, [wishlistreducer.product, wishlistreducer.type,userid, setwishlist]);
 
   useEffect(() => {
     getWishlistData();
   }, [getWishlistData]);
-
+ 
   const getCardData = useCallback(async () => {
-    const data = await cardfilter(cardreducer.product, cardreducer.type);
+    const data = await cardfilter(cardreducer.product, cardreducer.type,userid);
     setcard(data);
-  }, [cardreducer.product, cardreducer.type, setcard]);
+  }, [cardreducer.product, cardreducer.type, setcard,userid]);
 
   useEffect(() => {
     getCardData();

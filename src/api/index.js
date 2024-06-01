@@ -14,29 +14,33 @@ export const getallproduct = async () => {
 };
 
 const wishlistUrl = "https://shop-list-1-r908.onrender.com/api/wishlist";
-export const getallwishlist = async () => {
+export const getallwishlist = async (userid) => {
   try {
-    const {
-      data: { data },
-    } = await axios.get(wishlistUrl);
-
+    
+   
+    const  {data : {data}} = await axios.get(`${wishlistUrl}/${userid}`
+      
+    );
+    
+    
     return data;
   } catch (err) {
     console.log("error occured", err);
   }
 };
 
-export const postwishlist = async (wishlist) => {
+export const postwishlist = async (obj) => {
   try {
-    await axios.post(wishlistUrl, wishlist);
+    await axios.post(wishlistUrl, {userid:obj.userid,product:obj.product});
     
   } catch (err) {
     console.log("error occured", err);
   }
 };
-export const deletewishlist = async (product) => {
+export const deletewishlist = async ({userid,productid}) => {
   try {
-     await axios.delete(wishlistUrl + "/" + product.id);
+    
+     await axios.delete(`${wishlistUrl}/${userid}+${productid}`);
   } catch (err) {
     console.log("error occured", err);
   }
@@ -44,11 +48,15 @@ export const deletewishlist = async (product) => {
 
 const cardUrl = "https://shop-list-1-r908.onrender.com/api/card";
 
-export const getallcard = async () => {
+export const getallcard = async (userid) => {
   try {
-    const {
-      data: { data },
-    } = await axios.get(cardUrl);
+    console.log("usercard---",{userid})
+   
+    const  {data : {data}} = await axios.get(`${cardUrl}/${userid}`
+      
+    );
+    
+    console.log("dar--",data);
 
     return data;
   } catch (err) {
@@ -56,17 +64,20 @@ export const getallcard = async () => {
   }
 };
 
-export const postcard = async (wishlist) => {
+export const postcard = async ({userid,product}) => {
+  console.log("user--",userid,"product--",product)
   try {
-     await axios.post(cardUrl, wishlist);
+    await axios.post(cardUrl, {userid,product});
+    
   } catch (err) {
     console.log("error occured", err);
   }
 };
-export const deletecard = async (product) => {
+export const deletecard = async ({userid,productid}) => {
   try {
-     await axios.delete(cardUrl + "/" + product.id);
-  } catch (err) {
-    console.log("error occured", err);
-  }
+    
+    await axios.delete(`${cardUrl}/${userid}+${productid}`);
+ } catch (err) {
+   console.log("error occured", err);
+ }
 };

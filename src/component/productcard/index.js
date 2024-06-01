@@ -12,10 +12,13 @@ const Productcard = ({ product }) => {
   };
   const {setcardreducer,card,setproduct}=useCard();
   const {setwishlistreducer,wishlist}=useWishlist();
-const findProductInWishlist= (wishlist,productId)=> wishlist.some(prod=> prod._id===productId);
+const findProductInWishlist= (wishlist,productId)=> {
+const flag=wishlist?.length>0?wishlist.some((prod) => prod._id === productId):false;
+return flag;
+}
  const isInWishlist=findProductInWishlist(wishlist,product._id);
 
- const findProductInCard= (card,productId)=> card.some(prod=> prod._id===productId);
+ const findProductInCard= (card,productId)=> card?.some(prod=> prod._id===productId);
  const isInCard=findProductInCard(card,product._id);
 
   return (

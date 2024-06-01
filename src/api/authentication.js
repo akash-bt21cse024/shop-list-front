@@ -23,6 +23,7 @@ export const signupfxn = async (user) => {
       } = await axios.post(loginurl, user);
       localStorage.setItem("token",data.token);
       sessionStorage.setItem("token",data.token);
+      
      return data;
     } catch (err) {
       console.log("error occured", err);
