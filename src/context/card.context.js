@@ -15,6 +15,7 @@ import { cardfxn } from "../reducer/card.reducer";
   };
   
   export const Cardprovider = ({ children }) => {
+    const [amount,setamount]=useState(0);
     const[userid,setuserid]=useState("");
     const[token,settoken]=useState("");
     const [signup,setsignup]=useState(false);
@@ -26,7 +27,7 @@ import { cardfxn } from "../reducer/card.reducer";
     );
     return (
       <Cardcontext.Provider
-        value={{ card,product,setproduct,userid,setuserid,signup,setsignup,token,settoken, setcard,cardreducer, setcardreducer }}
+        value={{ card,product,amount,setamount, setproduct,userid,setuserid,signup,setsignup,token,settoken, setcard,cardreducer, setcardreducer }}
       >
         {children}
       </Cardcontext.Provider>
