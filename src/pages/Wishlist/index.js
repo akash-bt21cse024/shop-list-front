@@ -12,7 +12,7 @@ export const Wishlistpage = () => {
     <div>
       <Header />
       <main className="mt-16">
-        <div className="flex flex-wrap gap-3 ml-12">
+        <div className="flex flex-wrap gap-3 ml-12 ">
           {wishlist?.length > 0 ? (
             wishlist.map((product) => (
               <Wishlist key={product._id} product={product} />
@@ -33,6 +33,7 @@ export const Wishlistpage = () => {
             </div>
           )}
         </div>
+        
       </main>
     </div>
   );

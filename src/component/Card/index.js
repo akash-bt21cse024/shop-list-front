@@ -1,40 +1,51 @@
  
 import { useCard } from "../../context/card.context"; 
 import { useNavigate } from "react-router-dom";
-
+import { useState ,useEffect} from "react";
 export const Card = ({ product }) => {
+
+
    const oldprice = (price, discount) => {
      return Number(
        ((Number(price) * 100) / (100 - Number(discount))) * 84
      ).toFixed(2);
    };
-
+const [count,setcount]=useState(1);
   const navigate=useNavigate()
- const {setcardreducer,setproduct}=useCard();
+ const {setcardreducer,setproduct,setcartlist}=useCard();
+
+
+useEffect(()=>
+  setcartlist((list) => ({
+    ...list,
+    [product.price]: count
+  })),[product.price,setcartlist,count,product]);
+ 
+
    return (
-     <div className="border bg-white w-56 drop-shadow-2xl rounded-lg flex flex-col mt-20 gap-2">
-       <div className="w-56 ">
+     <div className="border bg-cyan-50  drop-shadow-2xl rounded-lg flex  gap-2">
+       <div className=" ">
        <button onClick={()=>{ setproduct(product)
         navigate('/product');
       }}>
         <img
-          className="w-full h-32 rounded-t-lg bg-slate-100 image"
+          className="w-80 h-56 rounded-t-lg bg-slate-100 image"
           src={product.thumbnail}
           alt="img"
         ></img></button>
        </div>
-       <div>
+       <div className=" w-80">
          <div className="pl-2">
-           <p className=" font-bold text-xl">{product.brand}</p>
-           <p className=" text-xl text-gray-700">{product.title}</p>
+           <p className=" font-bold text-xl my-2">{product.brand}</p>
+           <p className=" text-xl text-gray-700 my-2">{product.title}</p>
          </div>
-         <div className="flex gap-2 items-end pl-2">
+         <div className="flex gap-2 items-end pl-2 my-2">
            <p className="font-bold text-xl ">Rs.{Number(product.price) * 84}</p>
            <p className="line-through text-gray-700">
              {oldprice(product.price, product.discountPercentage)}
            </p>
          </div>
-         <div className=" flex item-center pl-2 justify-between">
+         <div className=" flex item-center pl-2 gap-4 my-2">
            <div>
              <span className="text-xl text-gray-70 0 font-bold">
                {product.rating}
@@ -49,16 +60,25 @@ export const Card = ({ product }) => {
              </span>
            </div>
          </div>
+         <div className="flex gap-2 my-3 items-center font-bold text-xl">
+            <h1 className="mr-3">No of item--</h1><button onClick={()=>setcount((count=> count>1?count-1:count))} className="border w-5 bg-cyan-400 h-5 flex justify-center pb-1 items-center hover:opacity-50 rounded-full">-</button>{count}<button onClick={()=>setcount((count)=>count<product.stock?count+1:count)} className="border hover:opacity-50 w-5 h-5 pb-1 flex justify-center items-center bg-cyan-400 rounded-full">+</button>
+          </div>
+          <button
+  onClick={() => {
+    setcardreducer({ type: "delete", payload: product });
+    setcartlist((arr) => {
+      const newArr = { ...arr }; // Create a copy of the current state
+      delete newArr[product.price]; // Delete the property from the new state
+      return newArr; // Return the new state
+    });
+  }}
+  className="text-stone-50 px-3 py-1 w-full border-slate-800 rounded-md bg-zinc-950 border my-2 hover:opacity-50"
+>
+  remove from card
+</button>
+
        </div>
-       <div className="flex items-center mt-auto">
-         <button onClick={()=>{
-         
-           setcardreducer({type :"delete",payload : product})}} 
-         className="text-stone-50  px-3 py-1 border-slate-800 rounded-md bg-zinc-950 border hover:opacity-50">
-           remove from card
-         </button>
-        
-       </div>
+       
      </div>
    );
  };

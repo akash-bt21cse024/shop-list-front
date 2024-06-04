@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useCard } from "../../context/card.context";
 import { useWishlist } from "../../context/wishlist.context";
-
+import { useState } from "react";
 
 export const Product = (product) => {
-  
+  const [count,setcount]=useState(1);
   product = product.product;
   const navigate = useNavigate();
   
@@ -51,7 +51,7 @@ export const Product = (product) => {
       }
       const option = {
         key: apikey,
-        amount: Number(product.price) * 8400,
+        amount: Number(product.price)*count * 8400,
         currancy: "INR",
         name: "Shoping by Akash",
         email: "bt21cse24@nituk.ac.in",
@@ -96,17 +96,17 @@ export const Product = (product) => {
             {" "}
             <p>{product.title}</p>{" "}
           </div>
-          <div className="description   flex  text-xl items-center  flex-col ">
+          <div className="description  px-4 flex  text-xl items-center  flex-col ">
             {" "}
             <p>{product.description}</p>
           </div>
           <div className="my-2">
             <div className="flex gap-2 items-end items-center  ">
               <p className="font-bold text-xl mx-3">
-                Rs.{Number(product.price) * 84}
+                Rs.{Number(product.price)*count * 84}
               </p>
               <p className="line-through text-gray-700 mx-3">
-                {oldprice(product.price, product.discountPercentage)}
+                {oldprice(product.price, product.discountPercentage)*count}
               </p>
               <span className="text-xl text-orange-500 text-gray-700 mx-3">
                 ({product.discountPercentage} % <b>OFF</b>)
@@ -124,6 +124,9 @@ export const Product = (product) => {
             </div>
           </div>
           
+          <div className="flex gap-2 my-3 items-center font-bold text-xl">
+            <h1 className="mr-3">No of item--</h1><button onClick={()=>setcount((count=> count>1?count-1:count))} className="border w-5 bg-cyan-400 h-5 flex justify-center pb-1 items-center hover:opacity-50 rounded-full">-</button>{count}<button onClick={()=>setcount((count)=>count<product.stock?count+1:count)} className="border hover:opacity-50 w-5 h-5 pb-1 flex justify-center items-center bg-cyan-400 rounded-full">+</button>
+          </div>
             <button
               onClick={() => {
                 setwishlistreducer({ type: "post", payload: product });

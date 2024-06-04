@@ -1,6 +1,6 @@
 import axios from "axios";
-
-const productUrl = "https://shop-list-1-r908.onrender.com/api/products";
+const api="https://shop-list-2.onrender.com"
+const productUrl = api+"/api/products";
 export const getallproduct = async () => {
   try {
     const {
@@ -13,7 +13,7 @@ export const getallproduct = async () => {
   }
 };
 
-const wishlistUrl = "https://shop-list-1-r908.onrender.com/api/wishlist";
+const wishlistUrl = api+"/api/wishlist";
 export const getallwishlist = async (userid) => {
   try {
     
@@ -46,7 +46,7 @@ export const deletewishlist = async ({userid,productid}) => {
   }
 };
 
-const cardUrl = "https://shop-list-1-r908.onrender.com/api/card";
+const cardUrl = api+"/api/card";
 
 export const getallcard = async (userid) => {
   try {

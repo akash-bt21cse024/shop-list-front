@@ -1,8 +1,8 @@
 
 import  axios  from "axios"
-
-const sinupurl="https://shop-list-1-r908.onrender.com/api/auth/signup";
-const loginurl="https://shop-list-1-r908.onrender.com/api/auth/login";
+const api="https://shop-list-2.onrender.com"
+const sinupurl= api+ "/api/auth/signup";
+const loginurl= api+"/api/auth/login";
 
 
 export const signupfxn = async (user) => {

@@ -53,8 +53,10 @@ import { useNavigate } from "react-router-dom";
         <div className="flex items-center mt-auto">
           <button onClick={()=>{
           
-            setwishlistreducer({type :"delete",payload : product})}} 
-          className="text-stone-50  px-3 py-1 border-slate-800 rounded-md bg-zinc-950 border hover:opacity-50">
+            setwishlistreducer({type :"delete",payload : product}
+          
+            )}} 
+          className="text-stone-50 w-full px-3 py-1 border-slate-800 rounded-md bg-zinc-950 border hover:opacity-50">
             remove from wishlist
           </button>
          
