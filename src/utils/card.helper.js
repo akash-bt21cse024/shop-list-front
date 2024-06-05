@@ -20,6 +20,7 @@ export const cardfilter= async (product,type,userid)=>{
         }
         case 'delete':{
             const productid=product._id;
+            
             await deletecard({userid,productid});
             const data= await getallcard(userid);
             return data;

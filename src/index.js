@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Filterprovider } from "./context/filter.context";
 import { Wishlistprovider } from "./context/wishlist.context";
 import { Cardprovider } from "./context/card.context";
+import { Addressprovider } from "./context/address.context";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -15,8 +16,11 @@ root.render(
       <Filterprovider>
         <Wishlistprovider>
           <Cardprovider>
+            <Addressprovider>
             <App />
+            </Addressprovider>
           </Cardprovider>
+         
         </Wishlistprovider>
       </Filterprovider>
     </BrowserRouter>

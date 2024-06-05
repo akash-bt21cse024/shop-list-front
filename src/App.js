@@ -10,10 +10,22 @@ import { Cardpage } from "./pages/Card";
 import { Productpage } from "./pages/Product";
 import { Authpage } from "./pages/Auth";
 import { ProtectedRoute } from "./context/ProtectedRoute";
-
+import { Checkout } from "./pages/Checkout";
+import { addressfilter } from "./utils/address.heplper";
+import { useAddress } from "./context/address.context";
 function App() {
   const { setwishlist, wishlistreducer } = useWishlist();
   const { setcard, cardreducer,userid } = useCard();
+  const{setaddress,addressreducer}=useAddress();
+
+const getalladdress= useCallback( async()=>{
+  const add = await addressfilter(addressreducer.product,addressreducer.type,userid);
+  console.log("app  addr-",addressreducer.product)
+  console.log("app addrlist",add)
+  setaddress(add);
+} ,[addressreducer.product,addressreducer.type,userid,setaddress])
+
+useEffect(()=>{getalladdress();},[getalladdress])
 
   const getWishlistData = useCallback(async () => {
     const data = await wishfilter (wishlistreducer.product, wishlistreducer.type,userid);
@@ -40,6 +52,7 @@ function App() {
       <Route path="/card" element={<ProtectedRoute><Cardpage /></ProtectedRoute>} />
       <Route path="/product" element={<Productpage />} />
       <Route path="/auth" element={<Authpage />} />
+      <Route path="/checkout" element={<Checkout></Checkout>}></Route>
     </Routes>
   );
 }

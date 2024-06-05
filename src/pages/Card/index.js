@@ -3,11 +3,13 @@ import { Card } from "../../component/Card";
 import { useNavigate } from "react-router-dom";
 import { useCard } from "../../context/card.context";
 import { useState, useEffect } from "react";
-
+import { useAddress } from "../../context/address.context";
 export const Cardpage = () => {
   const [amount, setAmount] = useState(0);
   const [count, setCount] = useState(1);
   const { card, cartlist } = useCard();
+ const{setstatus}=useAddress();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export const Cardpage = () => {
     setAmount(amt);
     setCount(flag);
   }, [cartlist]);
-
+  
   return (
     <div>
       <Header />
@@ -32,18 +34,25 @@ export const Cardpage = () => {
               {card.map((product) => (
                 <Card key={product._id} product={product} />
               ))}
-              </div>
-              <div className="w-[40rem] font-bold text-xl border bg-cyan-50 flex flex-col fixed items-center drop-shadow-lg right-8">
-                <h1>Number of items - {count}</h1>
-                <h1>Deleviry charges-- 100</h1>
-                <h1>Total amount - {amount * 84  +100}</h1>
-                <button
-              className=" hover:opacity-50  px-3 my-2 w-[10rem] h-[3rem]  border-slate-800 rounded-md bg-amber-600 border "
+              </div> 
+              <div className="w-[40rem] h-[36rem] border bg-cyan-50 flex items-center justify-center fixed  drop-shadow-2xl right-8" >
+              <div className="w-[25rem] h-[24rem] text-xl border bg-cyan-100 flex flex-col drop-shadow-2xl">
+                <h1 className="m-2">Number of items &nbsp; &nbsp;:{count}</h1>
+                <h1 className="m-2">All products price &nbsp; :{amount * 84 } Rs</h1>
+                <h1 className="m-2">Deleviry charges&nbsp;&nbsp;&nbsp; &nbsp;:100 Rs</h1>
+                <h1>***-------------------------------------------***</h1>
+                <h1 className="m-2">Total amount &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;:{amount * 84  +100} Rs</h1>
+                <button onClick={()=>{
+                setstatus({count:count,amount:amount*84+100});
+                navigate("/checkout");
+                }}
+              className=" hover:opacity-50  px-4 my-2 w-[15rem] h-[3rem] self-center border-slate-800 rounded-md bg-amber-600 border "
 
             >
-              Buy
+              Checkout
             </button>
               </div>
+              </div>  
               </div>
           ) : (
             <div className="flex items-center justify-center w-full">

@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 const Productcard = ({ product }) => {
   const navigate=useNavigate();
-
+    
   const oldprice = (price, discount) => {
     return Number(
       ((Number(price) * 100) / (100 - Number(discount))) * 84
     ).toFixed(2);
   };
-  const {setcardreducer,card,setproduct}=useCard();
+  const {setcardreducer,card,setproduct,token}=useCard();
   const {setwishlistreducer,wishlist}=useWishlist();
 const findProductInWishlist= (wishlist,productId)=> {
 const flag=wishlist?.length>0?wishlist.some((prod) => prod._id === productId):false;
@@ -60,15 +60,13 @@ return flag;
         </div>
       </div>
       <div className="flex justify-between mt-auto">
-        <button onClick={()=>{
-          setwishlistreducer({type : "post",payload:product})
+        <button onClick={()=>{token?.length>0?setwishlistreducer({type : "post",payload:product}):navigate("/auth")
           }} disabled={isInWishlist}
           className={`text-stone-50  px-3 py-1 border-slate-800 rounded-md bg-zinc-950 border ${isInWishlist? 'opacity-50':"hover:opacity-50"}`}>
          { isInWishlist?'wishlisted':"Wishlist"}
         </button>
         <button onClick={()=>{
-          
-          setcardreducer({type : "post",payload:product})
+          token?.length>0? setcardreducer({type : "post",payload:product}):navigate("/auth")
           }} disabled={isInCard} className={`text-stone-50  px-3 py-1 border-slate-800 rounded-md bg-zinc-950 border ${isInCard? 'opacity-50':"hover:opacity-50"}`}>
           { isInCard?'Addedd ':" Add to card"}
          

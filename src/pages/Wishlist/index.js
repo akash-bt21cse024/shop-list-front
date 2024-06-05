@@ -3,7 +3,6 @@ import { Wishlist } from "../../component/Wishlist";
 
 import { useWishlist } from "../../context/wishlist.context";
 import { useNavigate } from "react-router-dom";
-
 export const Wishlistpage = () => {
   const navigate = useNavigate();
   const { wishlist } = useWishlist();

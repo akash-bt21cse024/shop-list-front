@@ -38,7 +38,7 @@ export const postwishlist = async (obj) => {
   }
 };
 export const deletewishlist = async ({userid,productid}) => {
-  try {
+  try { 
     
      await axios.delete(`${wishlistUrl}/${userid}+${productid}`);
   } catch (err) {
@@ -50,7 +50,7 @@ const cardUrl = api+"/api/card";
 
 export const getallcard = async (userid) => {
   try {
-    console.log("usercard---",{userid})
+    
    
     const  {data : {data}} = await axios.get(`${cardUrl}/${userid}`
       
@@ -65,7 +65,7 @@ export const getallcard = async (userid) => {
 };
 
 export const postcard = async ({userid,product}) => {
-  console.log("user--",userid,"product--",product)
+  
   try {
     await axios.post(cardUrl, {userid,product});
     
@@ -75,8 +75,9 @@ export const postcard = async ({userid,product}) => {
 };
 export const deletecard = async ({userid,productid}) => {
   try {
-    
-    await axios.delete(`${cardUrl}/${userid}+${productid}`);
+    console.log("productid-----------------",productid)
+   
+   await axios.delete(`${cardUrl}/${userid}+${productid}`);
  } catch (err) {
    console.log("error occured", err);
  }

@@ -15,7 +15,7 @@ export const Homepage = () => {
   useEffect(() => {
     getdata();
   });
- 
+  
   const {sortbyprice,discount}=useFilter();
   const productsfilterbyprice = productfilterbyprice(products,sortbyprice);
   const filterproduct = productfilterbyprice(productsfilterbyprice,discount)
