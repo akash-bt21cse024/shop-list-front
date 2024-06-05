@@ -106,7 +106,7 @@ export const Product = (product) => {
                 isInCard ? "opacity-50" : "hover:opacity-50"
               }`}
             >
-              {isInCard ? "Addedd in card" : " Add to card"}
+              {isInCard ? "Addedd in cart" : " Add to cart"}
             </button>
           
           

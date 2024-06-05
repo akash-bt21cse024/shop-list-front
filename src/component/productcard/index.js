@@ -68,7 +68,7 @@ return flag;
         <button onClick={()=>{
           token?.length>0? setcardreducer({type : "post",payload:product}):navigate("/auth")
           }} disabled={isInCard} className={`text-stone-50  px-3 py-1 border-slate-800 rounded-md bg-zinc-950 border ${isInCard? 'opacity-50':"hover:opacity-50"}`}>
-          { isInCard?'Addedd ':" Add to card"}
+          { isInCard?'Addedd ':" Add to cart"}
          
         </button>
       </div>
