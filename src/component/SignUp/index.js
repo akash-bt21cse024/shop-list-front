@@ -3,28 +3,31 @@ import { signupfxn } from "../../api/authentication"
 import { useCard } from "../../context/card.context"
 import { toast } from "react-toastify"
     export const SignUp =()=>{
-  const[test,settest]=useState(false);
+  
   const [name,setname]=useState("")
   const [email,setemail]=useState("")
   const [password,setpassword]=useState("")
   const [number,setnumber]=useState("")
   const {setsignup}=useCard();
-  const sign =async ()=>{
+  // const sign =async ()=>{
     
-    const data=await signupfxn({name,email,password,number},settest);
-  console.log(data);
-  }
+  //   const data=await signupfxn({name,email,password,number});
+  //   console.log("----------------------------------------------",data,typeof(data))
+  // return data;
+  // }
   const nameRegx=new RegExp(/[A-Za-z]{3,}/);
 const passwordRegx= new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)
 const numberRegx=new RegExp(/^[\d]{10}$/);
 const emailRegx=new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
-const submit =()=>{
+const submit = async()=>{
   if(!nameRegx.test(name)) { toast.warning("Not valid name")}
                 else if(!emailRegx.test(email)){ toast.warning("Not valid email")}
                 else if( !passwordRegx.test(password)){
                   toast.warning("password is not strong")
                 }else if(!numberRegx.test(number)){ toast.warning("number is not valid");}
-                  else{sign();
+                  else{
+                    const test=await signupfxn({name,email,password,number});
+                    console.log("________________test___________",test,typeof(test))
                     if(test)
                     {toast.success("Account is created ")
                       setsignup(false)

@@ -5,19 +5,20 @@ const sinupurl= api+ "/api/auth/signup";
 const loginurl= api+"/api/auth/login";
 
 
-export const signupfxn = async (user,settest) => {
+export const signupfxn = async (user) => {
     try {
     
-      const data = await axios.post(sinupurl, user);
+      await axios.post(sinupurl, user);
       
-      settest(true);
-     return data;
+      
+     return true;
     } catch (err) {
     
       console.log("error occured ", err);
+      return false;
     }
   }
-  export const loginfxn = async (user,settest) => {
+  export const loginfxn = async (user) => {
     try {
       
       const {
@@ -25,11 +26,12 @@ export const signupfxn = async (user,settest) => {
       } = await axios.post(loginurl, user);
       localStorage.setItem("token",data.token);
       sessionStorage.setItem("token",data.token);
-      settest(true);
-     return data;
+      
+     return true;
     } catch (err) {
      
       console.log("error occured", err);
+      return false;
     }
   }
 
