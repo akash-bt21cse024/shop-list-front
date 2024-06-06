@@ -28,7 +28,7 @@ const navigate=useNavigate();
     const testcredencial =async()=>{
       localStorage.setItem("userid","8650489580");
       setuserid("8650489580");
-      const data=await loginfxn({password : "akash@2002",number :"8650489580"})
+      const data=await loginfxn({password : "Akash@2002",number :"8650489580"})
      
       console.log(data);
       toast.success("Login to admin account")
