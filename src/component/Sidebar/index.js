@@ -13,13 +13,13 @@ const {setfilter,discount,sortbyprice}=useFilter();
       <div>
         <label>
           <input checked={sortbyprice === 'lth'} type="radio" name="price" onChange={()=>setfilter({type :'lth'})}></input>
-          <span>Low to high</span>
+          <span className="text-sm">Low to high</span>
         </label>
       </div>
       <div>
         <label>
           <input checked={sortbyprice === 'htl'} type="radio" name="price" onChange={()=>setfilter({type :'htl'})}></input>
-          <span>High to Low</span>
+          <span className="text-sm">High to Low</span>
         </label>
       </div>
     </div>
@@ -28,19 +28,19 @@ const {setfilter,discount,sortbyprice}=useFilter();
       <div>
         <label>
           <input checked={discount === '15'} type="radio" name="discount" onChange={()=>setfilter({type :'15'})}></input>
-          <span>Discount greater than 15 %</span>
+          <span className="text-sm">Discount greater than 15 %</span>
         </label>
       </div>
       <div>
         <label>
-          <input checked={discount === '10'} type="radio" name="discount" onChange={()=>setfilter({type :'10'})}></input>
-          <span>Discount greater than 10 %</span>
+          <input className="text-sm" checked={discount === '10'} type="radio" name="discount" onChange={()=>setfilter({type :'10'})}></input>
+          <span className="text-sm">Discount greater than 10 %</span>
         </label>
       </div>
       <div>
         <label>
           <input checked={discount === '5'} type="radio" name="discount" onChange={()=>setfilter({type :'5'})}></input>
-          <span>Discount greater than 5 %</span>
+          <span className="text-sm">Discount greater than 5 %</span>
         </label>
       </div>
     </div>
