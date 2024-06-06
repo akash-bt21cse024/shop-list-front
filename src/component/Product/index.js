@@ -3,6 +3,7 @@ import { useCard } from "../../context/card.context";
 import { useWishlist } from "../../context/wishlist.context";
 import { useState } from "react";
 import { useAddress } from "../../context/address.context";
+import { toast } from "react-toastify";
 export const Product = (product) => {
   const [count,setcount]=useState(1);
   product = product.product;
@@ -82,11 +83,25 @@ export const Product = (product) => {
           </div>
           
           <div className="flex gap-2 my-3 items-center font-bold text-xl">
-            <h1 className="mr-3">No of item--</h1><button onClick={()=>setcount((count=> count>1?count-1:count))} className="border w-5 bg-cyan-400 h-5 flex justify-center pb-1 items-center hover:opacity-50 rounded-full">-</button>{count}<button onClick={()=>setcount((count)=>count<product.stock?count+1:count)} className="border hover:opacity-50 w-5 h-5 pb-1 flex justify-center items-center bg-cyan-400 rounded-full">+</button>
+            <h1 className="mr-3">No of item--</h1><button onClick={()=>setcount((count=> {if(count>1)
+              return count-1
+              else{
+                toast.warning("item can not be less than 1")
+                return count;
+              }
+              }))} className="border w-5 bg-cyan-400 h-5 flex justify-center pb-1 items-center hover:opacity-50 rounded-full">-</button>{count}<button onClick={()=>setcount((count)=>
+                {if(count<product.stock)
+                  return count+1
+                  else{
+                    toast.warning("more item are not in stock")
+                    return count;
+                  }
+                  })} className="border hover:opacity-50 w-5 h-5 pb-1 flex justify-center items-center bg-cyan-400 rounded-full">+</button>
           </div>
             <button
               onClick={() => {
                 setwishlistreducer({ type: "post", payload: product });
+                toast.success("item added to wishlist")
               }}
               disabled={isInWishlist}
               className={`text-stone-50  px-3 my-2 w-[10rem] h-[3rem] border-slate-800 rounded-md bg-amber-600 border ${
@@ -100,6 +115,7 @@ export const Product = (product) => {
             <button
               onClick={() => {
                 setcardreducer({ type: "post", payload: product });
+                toast.success("item added to cart")
               }}
               disabled={isInCard}
               className={`text-stone-50  px-3 my-2 w-[10rem] h-[3rem]  border-slate-800 rounded-md bg-amber-600 border ${
@@ -117,7 +133,7 @@ export const Product = (product) => {
             navigate("/checkout")
           }}
             >
-              Buy
+              Checkout
             </button>
           
         </div>

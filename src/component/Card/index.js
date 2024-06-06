@@ -2,6 +2,8 @@
 import { useCard } from "../../context/card.context"; 
 import { useNavigate } from "react-router-dom";
 import { useState ,useEffect} from "react";
+import { toast } from "react-toastify";
+
 export const Card = ({ product }) => {
 
 
@@ -61,20 +63,33 @@ useEffect(()=>
            </div>
          </div>
          <div className="flex gap-2 my-3 items-center font-bold text-xl">
-            <h1 className="mr-3">No of item--</h1><button onClick={()=>setcount((count=> count>1?count-1:count))} className="border w-5 bg-cyan-400 h-5 flex justify-center pb-1 items-center hover:opacity-50 rounded-full">-</button>{count}<button onClick={()=>setcount((count)=>count<product.stock?count+1:count)} className="border hover:opacity-50 w-5 h-5 pb-1 flex justify-center items-center bg-cyan-400 rounded-full">+</button>
+            <h1 className="mr-3">No of item--</h1><button onClick={()=>setcount((count=> {if(count>1)
+              return count-1
+              else{
+                toast.warning("item can not be less than 1")
+                return count;
+              }
+              }))} className="border w-5 bg-cyan-400 h-5 flex justify-center pb-1 items-center hover:opacity-50 rounded-full">-</button>{count}<button onClick={()=>setcount((count)=>{if(count<product.stock)
+                return count+1
+                else{
+                  toast.warning("more item are not in stock")
+                  return count;
+                }
+                })} className="border hover:opacity-50 w-5 h-5 pb-1 flex justify-center items-center bg-cyan-400 rounded-full">+</button>
           </div>
           <button
   onClick={() => {
     setcardreducer({ type: "delete", payload: product });
     setcartlist((arr) => {
-      const newArr = { ...arr }; // Create a copy of the current state
-      delete newArr[product.price]; // Delete the property from the new state
-      return newArr; // Return the new state
+      const newArr = { ...arr }; 
+      delete newArr[product.price];
+      return newArr; 
     });
+    toast.success("item removed from your cart")
   }}
   className="text-stone-50 px-3 py-1 w-full border-slate-800 rounded-md bg-zinc-950 border my-2 hover:opacity-50"
 >
-  remove from card
+  Remove from card
 </button>
 
        </div>

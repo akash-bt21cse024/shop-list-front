@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { signupfxn } from "../../api/authentication"
 import { useCard } from "../../context/card.context"
+import { toast } from "react-toastify"
     export const SignUp =()=>{
-
+  const[test,settest]=useState(false);
   const [name,setname]=useState("")
   const [email,setemail]=useState("")
   const [password,setpassword]=useState("")
@@ -10,29 +11,50 @@ import { useCard } from "../../context/card.context"
   const {setsignup}=useCard();
   const sign =async ()=>{
     
-    const data=await signupfxn({name,email,password,number});
+    const data=await signupfxn({name,email,password,number},settest);
   console.log(data);
   }
+  const nameRegx=new RegExp(/[A-Za-z]{3,}/);
+const passwordRegx= new RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)
+const numberRegx=new RegExp(/^[\d]{10}$/);
+const emailRegx=new RegExp(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+const submit =()=>{
+  if(!nameRegx.test(name)) { toast.warning("Not valid name")}
+                else if(!emailRegx.test(email)){ toast.warning("Not valid email")}
+                else if( !passwordRegx.test(password)){
+                  toast.warning("password is not strong")
+                }else if(!numberRegx.test(number)){ toast.warning("number is not valid");}
+                  else{sign();
+                    if(test)
+                    {toast.success("Account is created ")
+                      setsignup(false)
+                    }
+                    else{
+                      toast.warning("this mobile user number already exist ")
+                    }
+                }
+}
 
         return(
          <div className="flex items-center justify-center">
             <div className="flex flex-col items-center border bg-cyan-50 drop-shadow-2xl w-1/2 h-[32rem] ">
               <h1 className="my-12 ">------CREATE NEW ACCOUNT------</h1>
-            <form className="flex flex-col h-[16rem] w-1/2 border drop-shadow-2xl bg-cyan-100  justify-center  ">
-              <div className=" my-2 border  drop-shadow-2xl bg-cyan-100 "><label className="mx-4">name--</label> <input onChange={(e)=>{console.log(e.target.value);
-                setname(e.target.value)}} required placeholder="Name"></input> </div>
+            <div className="flex flex-col h-[16rem] w-1/2 border drop-shadow-2xl bg-cyan-100  justify-center  ">
+              <div className=" my-2 border  drop-shadow-2xl bg-cyan-100 "><label className="mx-4">name--</label> <input onChange={(e)=>{setname(e.target.value)}} required placeholder="Name"></input> </div>
               <div className=" my-2  border drop-shadow-2xl bg-cyan-100" ><label className="mx-4">email--</label> <input onChange={(e)=>{setemail(e.target.value)}} required placeholder="email"></input></div>
               <div className=" my-2  border  drop-shadow-2xl bg-cyan-100"><label className="mx-4">password--</label><input onChange={(e)=>{setpassword(e.target.value)}} required type="password" placeholder="password"></input> </div>
               <div className=" my-2  border  drop-shadow-2xl bg-cyan-100"><label className="mx-4">number--</label> <input onChange={(e)=>{setnumber(e.target.value)}} required placeholder="number"></input></div>
-              <div className=" flex justify-center "> <button className="my-2 h-8 w-20 rounded-lg border  text-center drop-shadow-2xl bg-cyan-300 hover:opacity-50" onClick={()=>{ 
-                if(number.length!==10) { alert("number length is not equal to 10")}
-                else{sign();
+              <div className=" flex justify-between "> <button className="my-2 h-8 w-20 ml-4 rounded-lg border  text-center drop-shadow-2xl bg-cyan-300 hover:opacity-50" onClick={()=>submit()} type="submit"> submit </button>
+             <button className="my-2 h-8 w-36 rounded-lg border mr-4 text-center drop-shadow-2xl bg-cyan-300 hover:opacity-50" onClick={()=>{ 
+                toast.info("Account not create ")
                     setsignup(false);
-                }
+                
                
               }
-            } type="submit"> submit </button></div>
-          </form>
+            } type="submit"> Go to login </button>
+
+            </div>
+          </div>
           </div>
           </div> 
             

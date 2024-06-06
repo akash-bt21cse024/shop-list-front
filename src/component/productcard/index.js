@@ -1,7 +1,7 @@
 import { useWishlist } from "../../context/wishlist.context";
 import { useCard } from "../../context/card.context";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const Productcard = ({ product }) => {
   const navigate=useNavigate();
     
@@ -60,13 +60,26 @@ return flag;
         </div>
       </div>
       <div className="flex justify-between mt-auto">
-        <button onClick={()=>{token?.length>0?setwishlistreducer({type : "post",payload:product}):navigate("/auth")
+        <button onClick={()=>{
+        if(token?.length>0){
+          setwishlistreducer({type : "post",payload:product})
+          toast.success("Item is added to wishlist");
+        }else{
+          navigate("/auth")
+          toast.warning("please login first")
+        }
           }} disabled={isInWishlist}
           className={`text-stone-50  px-3 py-1 border-slate-800 rounded-md bg-zinc-950 border ${isInWishlist? 'opacity-50':"hover:opacity-50"}`}>
          { isInWishlist?'wishlisted':"Wishlist"}
         </button>
         <button onClick={()=>{
-          token?.length>0? setcardreducer({type : "post",payload:product}):navigate("/auth")
+           if (token?.length > 0) {
+            setcardreducer({ type: "post", payload: product });
+            toast.success("Item is added to cart");
+          } else {
+            toast.warning("please login first")
+            navigate("/auth");
+          }
           }} disabled={isInCard} className={`text-stone-50  px-3 py-1 border-slate-800 rounded-md bg-zinc-950 border ${isInCard? 'opacity-50':"hover:opacity-50"}`}>
           { isInCard?'Addedd ':" Add to cart"}
          

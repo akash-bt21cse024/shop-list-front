@@ -2,6 +2,8 @@
 import { useWishlist } from "../../context/wishlist.context";
 import { useCard } from "../../context/card.context";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
  export const Wishlist = ({ product }) => {
     const oldprice = (price, discount) => {
       return Number(
@@ -53,11 +55,11 @@ import { useNavigate } from "react-router-dom";
         <div className="flex items-center mt-auto">
           <button onClick={()=>{
           
-            setwishlistreducer({type :"delete",payload : product}
-          
-            )}} 
+            setwishlistreducer({type :"delete",payload : product})
+            toast.success("Item remove from wishlist");
+            }} 
           className="text-stone-50 w-full px-3 py-1 border-slate-800 rounded-md bg-zinc-950 border hover:opacity-50">
-            remove from wishlist
+            Remove from wishlist
           </button>
          
         </div>

@@ -11,9 +11,9 @@ setuserid(localStorage.getItem("userid"))
   return (
     <header
       className="flex drop-shadow-lg h-12 items-center justify-between bg-cyan-50
-      fixed top-0 left-0 w-screen z-20 border px-6 py-2"
+      fixed top-0 left-0 w-screen z-20 border  py-2"
     >
-      <button onClick={()=>navigate('/')} className="font-bold text-2xl">Akash</button>
+      <button onClick={()=>navigate('/')} className="font-bold text-2xl ml-4">Akash</button>
       <div className="flex gap-4 ">
         <div className="relative">
           <button onClick={()=>navigate('/wishlist')} >
@@ -25,7 +25,7 @@ setuserid(localStorage.getItem("userid"))
          
         </div>
 
-        <div className="relative">
+        <div className="relative ">
           <button onClick={()=>navigate('/card')}>
             <span className="material-symbols-outlined text-2xl h-8 w-8">
               shopping_cart
@@ -38,7 +38,7 @@ setuserid(localStorage.getItem("userid"))
         
           
         </div>
-        <div>
+        <div className="mr-6">
             <button  onClick={()=>{
               if(!token){
                 navigate("/auth")

@@ -9,10 +9,8 @@ export const getalladdress = async (userid) => {
     try {
       
      
-      const  {data : {data}} = await axios.get(`${url}/${userid}`
-        
-      );
-       console.log(data)
+      const  {data : {data}} = await axios.get(`${url}/${userid}`);
+      
       
       return data;
     } catch (err) {

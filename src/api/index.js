@@ -56,7 +56,7 @@ export const getallcard = async (userid) => {
       
     );
     
-    console.log("dar--",data);
+    
 
     return data;
   } catch (err) {
