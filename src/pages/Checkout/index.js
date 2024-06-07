@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCard } from "../../context/card.context";
 import { useWishlist } from "../../context/wishlist.context";
+import { toast } from "react-toastify";
 export const Checkout =()=>{
   const {address,addrflag,setaddrflag,setaddressreducer,status}=useAddress()
   const navigate=useNavigate();
@@ -67,9 +68,9 @@ export const Checkout =()=>{
        <div className="flex flex-col items-center border w-[40rem] bg-cyan-50 ml-[20rem] drop-shadow-2xl ">
           {address?.length>0?address.map((add)=>{
             
-            return(<label className="flex m-4">
+            return(<label key={add.pincode} className="flex m-4">
               <input onChange={()=>setaddr(true)} name="address" type="radio"></input>
-              <Shownaddr key={add.pincode}  address={add} ></Shownaddr>
+              <Shownaddr   address={add} ></Shownaddr>
             
             <button onClick={()=>setaddressreducer({type:"delete",payload:add})} className="font-bold text-xl hover:opacity-50  px-3 my-2 w-[15rem] h-[3rem] ml-8  rounded-md bg-cyan-200 border ">Delete address</button>
             </label>
@@ -81,7 +82,7 @@ export const Checkout =()=>{
            <div className="border w-[16rem] font-bold text-xl h-[16rem] flex flex-col items-center justify-center bg-cyan-100 drop-shadow-2xl flex">
             <h1>No of items-{status.count}</h1>
             <h1>Total amount -{status.amount}Rs</h1>
-            <button onClick={()=>{addr?payment():alert("please select address")}} className="font-bold text-xl hover:opacity-50  px-3 my-2 w-full h-[3rem]   rounded-md bg-cyan-300 border ">Buy</button>
+            <button onClick={()=>{addr?payment():toast.warning("please select address")}} className="font-bold text-xl hover:opacity-50  px-3 my-2 w-full h-[3rem]   rounded-md bg-cyan-300 border ">Buy</button>
             </div> </div>
         </main>:<Address></Address>}
         </div>
