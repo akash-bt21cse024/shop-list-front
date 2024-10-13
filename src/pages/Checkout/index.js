@@ -39,7 +39,7 @@ export const Checkout =()=>{
         key: apikey,
         amount: status.amount * 100,
         currancy: "INR",
-        name: "Shoping by Akash",
+        name: "Shoping done",
         email: "bt21cse24@nituk.ac.in",
         contact: "8650489580",
         description: "thanku for shoping",
