@@ -13,7 +13,7 @@ setuserid(localStorage.getItem("userid"))
       className="flex drop-shadow-lg h-12 items-center justify-between bg-cyan-50
       fixed top-0 left-0 w-screen z-20 border  py-2"
     >
-      <button onClick={()=>navigate('/')} className="font-bold text-2xl ml-4">Akash</button>
+      <button onClick={()=>navigate('/')} className="font-bold text-2xl ml-4">Shopyy</button>
       <div className="flex gap-4 ">
         <div className="relative">
           <button onClick={()=>navigate('/wishlist')} >
